@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 
 // Simple component validation tests
-describe('UI UIKit Integration', () => {
+describe('UIKit Integration', () => {
   it('should export core components', async () => {
     // Test that main exports are available
     const { Button, Input, Alert, Card } = await import('../../src/index');

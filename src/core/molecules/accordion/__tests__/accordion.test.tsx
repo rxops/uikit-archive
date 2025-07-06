@@ -58,10 +58,10 @@ describe('Accordion Component', () => {
       expect(navResult.issues).toHaveLength(0);
     });
 
-    it('should be screen reader compatible', () => {
+    it('should be screen reader compatible', async () => {
       const { render } = testEnv;
       
-      const { container } = render(
+      const { container } = await render(
         <Accordion 
           items={[{ id: 'test', title: 'Test Item' }]}
         />
@@ -72,10 +72,10 @@ describe('Accordion Component', () => {
       expect(srResult.issues).toHaveLength(0);
     });
 
-    it('should have proper ARIA attributes', () => {
+    it('should have proper ARIA attributes', async () => {
       const { render } = testEnv;
       
-      const { container } = render(
+      const { container } = await render(
         <Accordion 
           items={[{ id: 'test', title: 'Test Item' }]}
         />
@@ -95,10 +95,10 @@ describe('Accordion Component', () => {
   });
 
   describe('Mobile Healthcare Optimization', () => {
-    it('should meet touch target requirements', () => {
+    it('should meet touch target requirements', async () => {
       const { render } = testEnv;
       
-      const { container } = render(
+      const { container } = await render(
         <Accordion 
           items={[
             { id: 'item1', title: 'Allergies' },
@@ -113,13 +113,13 @@ describe('Accordion Component', () => {
       expect(touchResult.failures).toHaveLength(0);
     });
 
-    it('should work across mobile viewports', () => {
+    it('should work across mobile viewports', async () => {
       const { render } = testEnv;
       
-      Object.entries(HEALTHCARE_TEST_CONFIG.mobile.viewports).forEach(([_name, viewport]) => {
+      Object.entries(HEALTHCARE_TEST_CONFIG.mobile.viewports).forEach(async ([_name, viewport]) => {
         UIKitTestUtils.simulateViewport(viewport);
         
-        const { container } = render(
+        const { container } = await render(
           <Accordion 
             items={[{ id: 'test', title: 'Test' }]}
           />
@@ -134,10 +134,10 @@ describe('Accordion Component', () => {
       });
     });
 
-    it('should have healthcare-optimized styling', () => {
+    it('should have healthcare-optimized styling', async () => {
       const { render } = testEnv;
       
-      const { container } = render(
+      const { container } = await render(
         <Accordion 
           items={[{ id: 'test', title: 'Test' }]}
           variant="medical"
@@ -150,12 +150,12 @@ describe('Accordion Component', () => {
   });
 
   describe('HIPAA Compliance', () => {
-    it('should log audit events when enabled', () => {
+    it('should log audit events when enabled', async () => {
       const { render, userEvent } = testEnv;
       
       const patient = HealthcareTestHelpers.createTestPatient();
       
-      const { container } = render(
+      const { container } = await render(
         <Accordion 
           items={[
             { 
@@ -188,10 +188,10 @@ describe('Accordion Component', () => {
       );
     });
 
-    it('should handle sensitive medical data appropriately', () => {
+    it('should handle sensitive medical data appropriately', async () => {
       const { render } = testEnv;
       
-      const { container } = render(
+      const { container } = await render(
         <Accordion 
           variant="medical"
           items={[
@@ -234,12 +234,12 @@ describe('Accordion Component', () => {
       expect(renderTime).toBeLessThan(HEALTHCARE_TEST_CONFIG.performance.renderTime);
     });
 
-    it('should handle large datasets efficiently', () => {
+    it('should handle large datasets efficiently', async () => {
       const { render } = testEnv;
       
       const startTime = performance.now();
       
-      const { container } = render(
+      const { container } = await render(
         <Accordion 
           items={Array.from({ length: 100 }, (_, i) => ({
             id: `large-item-${i}`,
@@ -257,10 +257,10 @@ describe('Accordion Component', () => {
   });
 
   describe('Component Functionality', () => {
-    it('should expand and collapse items correctly', () => {
+    it('should expand and collapse items correctly', async () => {
       const { render, userEvent } = testEnv;
       
-      const { container } = render(
+      const { container } = await render(
         <Accordion 
           items={[{ id: 'test', title: 'Test Item' }]}
         />
@@ -279,10 +279,10 @@ describe('Accordion Component', () => {
       expect(content).toHaveClass('max-h-screen');
     });
 
-    it('should support multiple open items when configured', () => {
+    it('should support multiple open items when configured', async () => {
       const { render, userEvent } = testEnv;
       
-      const { container } = render(
+      const { container } = await render(
         <Accordion 
           multiple={true}
           items={[
@@ -302,10 +302,10 @@ describe('Accordion Component', () => {
       expect(buttons[1]).toHaveAttribute('aria-expanded', 'true');
     });
 
-    it('should respect default open state', () => {
+    it('should respect default open state', async () => {
       const { render } = testEnv;
       
-      const { container } = render(
+      const { container } = await render(
         <Accordion 
           items={[
             { id: 'open', title: 'Open Item', defaultOpen: true },
@@ -320,10 +320,10 @@ describe('Accordion Component', () => {
       expect(buttons[1]).toHaveAttribute('aria-expanded', 'false');
     });
 
-    it('should handle disabled items', () => {
+    it('should handle disabled items', async () => {
       const { render, userEvent } = testEnv;
       
-      const { container } = render(
+      const { container } = await render(
         <Accordion 
           items={[{ id: 'disabled', title: 'Disabled Item', disabled: true }]}
         />
@@ -341,10 +341,10 @@ describe('Accordion Component', () => {
   });
 
   describe('Healthcare-Specific Features', () => {
-    it('should display medical severity indicators', () => {
+    it('should display medical severity indicators', async () => {
       const { render } = testEnv;
       
-      const { container } = render(
+      const { container } = await render(
         <Accordion 
           variant="medical"
           items={[
@@ -362,13 +362,13 @@ describe('Accordion Component', () => {
       expect(badge).toHaveClass('bg-primary-100');
     });
 
-    it('should integrate with medical workflow context', () => {
+    it('should integrate with medical workflow context', async () => {
       const { render } = testEnv;
       
       const _provider = HealthcareTestHelpers.createTestProvider();
       const patient = HealthcareTestHelpers.createTestPatient();
       
-      const { container } = render(
+      const { container } = await render(
         <Accordion 
           variant="medical"
           items={[

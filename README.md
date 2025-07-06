@@ -4,7 +4,7 @@
 
 ![RxOps](docs/images/logo.png)
 
-**A modern, Medical industry-focused UI UIKit built with Qwik**
+**A modern, Medical industry-focused UIKit built with Qwik**
 
 [![npm version](https://badge.fury.io/js/@rxops%2Fui.svg)](https://badge.fury.io/js/@rxops%2Fui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)

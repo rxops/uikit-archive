@@ -1,6 +1,6 @@
 # RxOps UIKit
 
-A Medical industry-focused UI UIKit built with Qwik, inspired by Radzen Blazor components but simplified for healthcare applications.
+A Medical industry-focused UIKit built with Qwik, inspired by Radzen Blazor components but simplified for healthcare applications.
 
 ## 🏗️ Architecture
 

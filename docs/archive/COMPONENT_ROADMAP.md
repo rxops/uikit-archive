@@ -5,7 +5,7 @@
 **Goal**: Complete Medical industry-focused UI library with comprehensive test coverage
 
 ## 🎯 **Mission Statement**
-Build a comprehensive, HIPAA-compliant UI UIKit for the RxOps healthcare platform with real-time consultation capabilities, patient management, and emergency response features.
+Build a comprehensive, HIPAA-compliant UIKit for the RxOps healthcare platform with real-time consultation capabilities, patient management, and emergency response features.
 
 ## 📊 **Current Status Overview**
 
