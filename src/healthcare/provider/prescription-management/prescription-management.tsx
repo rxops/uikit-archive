@@ -3,9 +3,8 @@ import { Text } from '../../../core/atoms/text/text';
 import { Card } from '../../../core/organisms/card/card';
 import { Button } from '../../../core/atoms/button/button';
 import { Badge } from '../../../core/atoms/badge';
-// Icons migrated to Icon component from utils/icons - removed: Pill, Calendar, AlertTriangle, Clock, MapPin, RefreshCw, Plus, Search, Filter
 import { BaseComponentProps, mergeClasses } from '../../../design-system/props';
-import { Icon } from '../../..';
+import { Icon } from '../../../core/atoms/icon';
 import { Row, Column } from '../../../layouts';
 
 export interface Prescription {
@@ -290,7 +289,7 @@ export const PrescriptionManagement = component$<PrescriptionManagementProps>((p
 
         <div class="mt-4 flex items-center justify-between">
           <Button
-            onClick$={() => onPrescriptionClick && onPrescriptionClick(prescription)}
+            onClick$={$(() => onPrescriptionClick && onPrescriptionClick(prescription))}
             variant="text"
             color="primary"
             size="sm"
@@ -299,7 +298,7 @@ export const PrescriptionManagement = component$<PrescriptionManagementProps>((p
           </Button>
           {prescription.refillsRemaining > 0 && prescription.status === 'active' && (
             <Button
-              onClick$={() => handleRefillRequest(prescription.id)}
+              onClick$={$(() => handleRefillRequest(prescription.id))}
               variant="elevated"
               color="primary"
               size="sm"
@@ -333,21 +332,20 @@ export const PrescriptionManagement = component$<PrescriptionManagementProps>((p
               <span class="text-sm text-neutral-normal">({filteredPrescriptions.length} prescriptions)</span>
             </div>
             <div class="flex items-center space-x-2">
-              {showFilters && (
-                <Button
-                  onClick$={() => showFiltersPanel.value = !showFiltersPanel.value}
-                  variant="outlined"
-                  color="secondary"
-                  size="sm"
-                  leftIcon={true}
-                >
+              {showFilters && (              <Button
+                onClick$={$(() => showFiltersPanel.value = !showFiltersPanel.value)}
+                variant="outlined"
+                color="secondary"
+                size="sm"
+                leftIcon={true}
+              >
                   <Icon icon="filter" class="w-4 h-4 mr-1" />
                   Filters
                 </Button>
               )}
               {isEditable && onAddPrescription && (
                 <Button
-                  onClick$={onAddPrescription}
+                  onClick$={$(() => onAddPrescription && onAddPrescription())}
                   variant="elevated"
                   color="primary"
                   size="sm"
@@ -367,7 +365,7 @@ export const PrescriptionManagement = component$<PrescriptionManagementProps>((p
               type="text"
               placeholder="Search prescriptions..."
               value={searchTerm.value}
-              onInput$={(e) => handleSearchChange((e.target as HTMLInputElement).value)}
+              onInput$={$((e) => handleSearchChange((e.target as HTMLInputElement).value))}
               class="w-full pl-10 pr-4 py-2 border border-neutral-light rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus:ring-2 focus:ring-primary-normal focus:border-transparent"
             />
           </div>
@@ -381,11 +379,11 @@ export const PrescriptionManagement = component$<PrescriptionManagementProps>((p
                   <select
                     multiple
                     value={filters.status}
-                    onChange$={(e) => {
+                    onChange$={$((e) => {
                       const select = e.target as HTMLSelectElement;
                       filters.status = Array.from(select.selectedOptions).map(option => option.value);
                       onFilterChange && onFilterChange(filters);
-                    }}
+                    })}
                     class="w-full px-3 py-1.5 text-sm border border-neutral-light rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus:ring-1 focus:ring-primary-normal"
                   >
                     <option value="active">Active</option>
@@ -399,11 +397,11 @@ export const PrescriptionManagement = component$<PrescriptionManagementProps>((p
                   <label class="block text-sm font-medium text-neutral-dark mb-1">Expiring Within</label>
                   <select
                     value={filters.expiringWithin || ''}
-                    onChange$={(e) => {
+                    onChange$={$((e) => {
                       const value = (e.target as HTMLSelectElement).value;
                       filters.expiringWithin = value ? parseInt(value) : undefined;
                       onFilterChange && onFilterChange(filters);
-                    }}
+                    })}
                     class="w-full px-3 py-1.5 text-sm border border-neutral-light rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus:ring-1 focus:ring-primary-normal"
                   >
                     <option value="">Any time</option>
@@ -417,10 +415,10 @@ export const PrescriptionManagement = component$<PrescriptionManagementProps>((p
                     type="checkbox"
                     id="needsRefill"
                     checked={filters.needsRefill}
-                    onChange$={(e) => {
+                    onChange$={$((e) => {
                       filters.needsRefill = (e.target as HTMLInputElement).checked;
                       onFilterChange && onFilterChange(filters);
-                    }}
+                    })}
                     class="h-4 w-4 text-primary-600 focus:ring-primary-normal border-neutral-light rounded"
                   />
                   <label for="needsRefill" class="ml-2 text-sm text-neutral-dark">
@@ -438,14 +436,13 @@ export const PrescriptionManagement = component$<PrescriptionManagementProps>((p
             <div class="text-center py-8">
               <Icon icon="pill" class="w-12 h-12 text-neutral-light mx-auto mb-4" />
               <Text as="p" color="gray-500">No prescriptions found</Text>
-              {isEditable && onAddPrescription && (
-                <Button
-                  onClick$={onAddPrescription}
-                  variant="text"
-                  color="primary"
-                  size="sm"
-                  class="mt-4"
-                >
+              {isEditable && onAddPrescription && (              <Button
+                onClick$={$(() => onAddPrescription && onAddPrescription())}
+                variant="text"
+                color="primary"
+                size="sm"
+                class="mt-4"
+              >
                   Add the first prescription
                 </Button>
               )}
